@@ -20,7 +20,7 @@ public class Reward {
   @NonNull
   @NotBlank
   @Column(name = "Value")
-  private int rewardValue;
+  private Integer rewardValue;
 
   @ManyToOne(fetch = FetchType.LAZY) // Lazy loading is often a sensible default
   @JoinColumn(name = "challenge_id") // This defines the foreign key column.

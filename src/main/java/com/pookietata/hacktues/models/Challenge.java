@@ -18,7 +18,7 @@ import java.util.Set;
 public class Challenge {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long challenge_id;
+  private Long challengeId;
 
   @NonNull
   @NotBlank
@@ -28,7 +28,7 @@ public class Challenge {
   @NonNull
   @NotBlank
   @Column(name = "Reward")
-  private int rewardValue;
+  private Integer rewardValue;
 
   @NonNull
   @NotBlank

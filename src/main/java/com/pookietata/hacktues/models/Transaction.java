@@ -38,7 +38,7 @@ public class Transaction {
   @NonNull
   @NotBlank
   @Column(name = "Transaction_type")
-  private TransactionType type;
+  private TransactionType transactionType;
 
 }
 
