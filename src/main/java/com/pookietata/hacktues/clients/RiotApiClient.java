@@ -49,7 +49,6 @@ public class RiotApiClient {
                     url, HttpMethod.GET, new HttpEntity<>(headers), MatchHistoryDto.class);
             return response.getBody();
         } catch (Exception e) {
-            // Implement appropriate error handling
             throw new RuntimeException("Failed to fetch match history after specified time: " + e.getMessage(), e);
         }
     }

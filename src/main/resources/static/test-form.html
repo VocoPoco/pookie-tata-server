@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Summoner Search Test Form</title>
+    <script>
+        async function fetchMatchHistory() {
+            const puuid = document.getElementById('puuid').value;
+            const response = await fetch(`/api/search?puuid=${encodeURIComponent(puuid)}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data); // For testing, just log to the console
+            } else {
+                console.error('Error fetching match history');
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Summoner Search Test Form</h1>
+<label for="puuid">PUUID:</label> <!-- Added label here -->
+<input type="text" id="puuid" placeholder="Enter PUUID">
+<button onclick="fetchMatchHistory()">Fetch Match History</button>
+
+<!-- You can add a div here to output the results if you want to display them on the page -->
+<div id="result"></div>
+</body>
+</html>
