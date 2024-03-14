@@ -5,14 +5,14 @@ version: '3.7'
 # Define services
 services:
   # App backend service
-  app-server:
+  pookietata-server:
     # Configuration for building the docker image for the backend service
     build:
-      context: pookietata-server
-      dockerfile: ../pookie-tata-client/Dockerfile
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
-    restart: always
+    restart: unless-stopped
     depends_on:
       - db # This service depends on PostgreSQL. Start that first.
     env_file: # Pass environment variables to the service
@@ -25,9 +25,9 @@ services:
     image: postgres:latest
     ports:
       - "5432:5432"
-    restart: always
+    restart: unless-stopped
     env_file:
-      - ../pookie-tata-client/database.env
+      - database.env
     volumes:
       - db-data:/var/lib/postgresql/data
     networks:

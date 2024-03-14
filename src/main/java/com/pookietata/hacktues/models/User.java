@@ -41,8 +41,16 @@ public class User {
     private String email;
 
     @NotBlank
+    @Column(name = "PUUID", length = 100)
+    private String PUUID;
+
+    @NotBlank
     @Column(name = "summoner_name", length = 100)
     private String summonerName;
+
+    @NotBlank
+    @Column(name = "summonerTag", length = 10)
+    private String summonerTag;
 
     @NotBlank
     @NumberFormat

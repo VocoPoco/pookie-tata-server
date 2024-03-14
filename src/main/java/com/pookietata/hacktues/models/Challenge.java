@@ -1,5 +1,6 @@
 package com.pookietata.hacktues.models;
 
+import com.pookietata.hacktues.models.enums.ChallengeStatus;
 import com.pookietata.hacktues.models.enums.ChallengeType;
 import lombok.*;
 
@@ -56,6 +57,10 @@ public class Challenge {
   @NotBlank
   @Column(name = "Entry_fee")
   private int entryFee;
+
+  @NonNull
+  @Column(name = "Challenge_Status")
+  private ChallengeStatus challengeStatus;
 
   @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Reward> rewards = new HashSet<>();
