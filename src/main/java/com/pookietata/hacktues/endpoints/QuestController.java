@@ -17,9 +17,9 @@ public class QuestController {
         this.riotApiClient = riotApiClient;
     }
 
-    @GetMapping("/summoner/{summonerName}")
-    public ResponseEntity<SummonerDto> getSummonerInfo(@PathVariable String summonerName) {
-        SummonerDto summonerDto = riotApiClient.getSummonerByName(summonerName);
+    @GetMapping("/summoner/puuid/{puuid}")
+    public ResponseEntity<SummonerDto> getSummonerByPuuid(@PathVariable String puuid) {
+        SummonerDto summonerDto = riotApiClient.getSummonerByPuuid(puuid);
         return ResponseEntity.ok(summonerDto);
     }
 
