@@ -4,30 +4,25 @@ FROM openjdk:8-alpine as build
 # Set the current working directory inside the image
 WORKDIR /app
 
-# Copy maven executable to the image
 COPY mvnw .
 COPY .mvn .mvn
-
-# Ensure mvnw is executable
-RUN chmod +x mvnw
-
-# Copy the pom.xml file
 COPY pom.xml .
 
-# Build all the dependencies in preparation to go offline.
-RUN ./mvnw dependency:go-offline -B
+# Ensure mvnw is executable and then download dependencies to go offline
+RUN chmod +x mvnw && ./mvnw dependency:go-offline -B
 
 # Copy the project source
 COPY src src
 
-# Package the application
+# Package the application without running tests
 RUN ./mvnw package -DskipTests
+
+# Extract the built application into the target/dependency directory
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
-#### Stage 2: A minimal docker image with command to run the app
-# Using the same version of JDK for JRE to avoid compatibility issues.
 FROM openjdk:8-jre-alpine
 
+# Define the path to dependencies
 ARG DEPENDENCY=/app/target/dependency
 
 # Copy project dependencies from the build stage
@@ -35,4 +30,5 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
+# Specify the entrypoint to run the application
 ENTRYPOINT ["java","-cp","app:app/lib/*","com.pookietata.hacktues.HackTuesApplication"]

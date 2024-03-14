@@ -1,5 +1,6 @@
 package com.pookietata.hacktues.models;
 
+import com.pookietata.hacktues.models.enums.RoleName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,8 +25,8 @@ public class Role {
     @Enumerated(EnumType.STRING)
     @NaturalId
     @Column(nullable = false, length = 20)
-    private String name;
+    private RoleName name;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 }
