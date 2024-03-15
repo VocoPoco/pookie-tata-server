@@ -1,4 +1,4 @@
-package com.pookietata.hacktues.models;
+package com.pookietata.hacktues.Dtos;
 
 import lombok.Getter;
 import lombok.Setter;

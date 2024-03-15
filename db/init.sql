@@ -1,12 +1,41 @@
+DROP TYPE IF EXISTS challenge_status CASCADE;
+CREATE TYPE challenge_status AS ENUM ('UPCOMING', 'ACTIVE', 'EXPIRED');
+
+-- No need to modify the ENUM type and other tables not related directly to the changes
+
+-- Adjust the personal_challenges table
+DROP TABLE IF EXISTS personal_challenges CASCADE;
+CREATE TABLE personal_challenges (
+                                     id SERIAL PRIMARY KEY,
+                                     name VARCHAR(255) NOT NULL,
+                                     description TEXT,
+                                     reward INTEGER,
+                                     start_date TIMESTAMP,
+                                     end_date TIMESTAMP,
+                                     completed BOOLEAN DEFAULT FALSE,
+                                     status challenge_status DEFAULT 'UPCOMING',
+                                     user_id INTEGER,
+                                     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Note: Ensure the users table and others are correctly set up as before
+
+
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
-                       id SERIAL PRIMARY KEY,
-                       username VARCHAR(50) UNIQUE NOT NULL,
-                       password VARCHAR(64) NOT NULL,
-                       email VARCHAR(100) UNIQUE NOT NULL,
-                       summoner_name VARCHAR(100),
-                       currency_balance INTEGER DEFAULT 0
+                        id SERIAL PRIMARY KEY,
+                        username VARCHAR(50) UNIQUE NOT NULL,
+                        password VARCHAR(64) NOT NULL,
+                        email VARCHAR(100) UNIQUE NOT NULL,
+                        summoner_name VARCHAR(100),
+                        currency_balance INTEGER DEFAULT 0,
+                        personal_challenge_id INTEGER,
+                        FOREIGN KEY (personal_challenge_id) REFERENCES personal_challenges(id) ON DELETE CASCADE,
+                        status challenge_status DEFAULT 'UPCOMING'
 );
+
+
+
 
 
 DROP TABLE IF EXISTS challenges CASCADE;
