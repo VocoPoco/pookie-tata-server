@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Transaction")
+@Table(name = "transaction")
 public class Transaction {
 
   @Id
@@ -26,18 +26,18 @@ public class Transaction {
 
   @NonNull
   @NotBlank
-  @Column(name = "Transaction_amount")
+  @Column(name = "transaction_amount")
   private Integer amount;
 
   @NonNull
   @NotBlank
-  @Column(name = "Transaction_timestamp")
+  @Column(name = "transaction_timestamp")
   @Temporal(TemporalType.TIMESTAMP)
   private Date timestamp;
 
   @NonNull
   @NotBlank
-  @Column(name = "Transaction_type")
+  @Column(name = "transaction_type")
   private TransactionType transactionType;
 
 }
