@@ -20,7 +20,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>8</java.version>
+        <java.version>17</java.version>
         <jjwt.version>0.11.2</jjwt.version>
     </properties>
 
@@ -110,14 +110,14 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.11.3</version> <!-- Check for the latest version -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version> <!-- Replace with the latest version available -->
                 <configuration>
-                    <nodeVersion>v14.17.0</nodeVersion> <!-- Use your required Node version -->
-                    <npmVersion>6.14.13</npmVersion> <!-- Use your required NPM version -->
-                    <workingDirectory>../client</workingDirectory>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
+
             </plugin>
         </plugins>
     </build>
