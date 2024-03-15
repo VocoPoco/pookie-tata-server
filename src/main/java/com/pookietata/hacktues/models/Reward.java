@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Reward")
+@Table(name = "reward")
 public class Reward {
 
   @Id
@@ -19,7 +19,7 @@ public class Reward {
 
   @NonNull
   @NotBlank
-  @Column(name = "Value")
+  @Column(name = "value")
   private Integer rewardValue;
 
   @ManyToOne(fetch = FetchType.LAZY) // Lazy loading is often a sensible default

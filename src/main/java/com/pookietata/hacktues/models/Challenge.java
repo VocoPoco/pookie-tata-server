@@ -15,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Challenges")
+@Table(name = "challenges")
 public class Challenge {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,38 +28,38 @@ public class Challenge {
 
   @NonNull
   @NotBlank
-  @Column(name = "Reward")
+  @Column(name = "reward")
   private Integer rewardValue;
 
   @NonNull
   @NotBlank
-  @Column(name = "Name")
+  @Column(name = "name")
   private String name;
 
   @NonNull
   @NotBlank
-  @Column(name = "Description", length = 1024)
+  @Column(name = "description", length = 1024)
   private String description;
 
   @NonNull
   @NotBlank
-  @Column(name = "Expiration_time")
+  @Column(name = "expiration_time")
   @Temporal(TemporalType.TIMESTAMP)
   private Date expirationTime;
 
   @NonNull
   @NotBlank
-  @Column(name = "Start_time")
+  @Column(name = "start_time")
   @Temporal(TemporalType.TIMESTAMP)
   private Date startTime;
 
   @NonNull
   @NotBlank
-  @Column(name = "Entry_fee")
+  @Column(name = "entry_fee")
   private int entryFee;
 
   @NonNull
-  @Column(name = "Challenge_Status")
+  @Column(name = "challenge_Status")
   private ChallengeStatus challengeStatus;
 
   @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)

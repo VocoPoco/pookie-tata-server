@@ -24,7 +24,7 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     @NaturalId
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 20, name = "name")
     private RoleName name;
 
     @ManyToMany(mappedBy = "roles")
