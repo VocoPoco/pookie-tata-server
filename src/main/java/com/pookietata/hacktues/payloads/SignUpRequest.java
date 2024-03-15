@@ -3,6 +3,7 @@ package com.pookietata.hacktues.payloads;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -26,4 +27,8 @@ public class SignUpRequest {
     @NotBlank
     @Size(min = 3, max = 16)
     private String summonerName;
+
+    @NotBlank
+    @Column(length = 10)
+    private String summonerTag;
 }

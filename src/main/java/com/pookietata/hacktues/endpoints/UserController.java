@@ -3,6 +3,7 @@ package com.pookietata.hacktues.endpoints;
 import com.pookietata.hacktues.models.User;
 import com.pookietata.hacktues.repositories.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/auth")
 public class UserController {
 
     private final UserRepository userRepository;
@@ -32,3 +34,4 @@ public class UserController {
         return users;
     }
 }
+
