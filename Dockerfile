@@ -1,5 +1,5 @@
 #### Stage 1: Build the application
-FROM openjdk:8-alpine as build
+FROM openjdk:17-jdk-alpine as build
 
 # Set the current working directory inside the image
 WORKDIR /app
@@ -20,7 +20,7 @@ RUN ./mvnw package -DskipTests
 # Extract the built application into the target/dependency directory
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
-FROM openjdk:8-jre-alpine
+FROM openjdk:17-jdk-alpine
 
 # Define the path to dependencies
 ARG DEPENDENCY=/app/target/dependency
