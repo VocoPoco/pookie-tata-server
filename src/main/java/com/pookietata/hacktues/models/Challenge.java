@@ -19,7 +19,7 @@ import java.util.Set;
 public class Challenge {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long challengeId;
+  private Long id;
 
   @NonNull
   @NotBlank
