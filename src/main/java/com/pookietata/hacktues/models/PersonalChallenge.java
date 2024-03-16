@@ -1,5 +1,6 @@
 package com.pookietata.hacktues.models;
 
+import com.pookietata.hacktues.models.enums.ChallengeGoal;
 import com.pookietata.hacktues.models.enums.ChallengeStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,13 +21,17 @@ public class PersonalChallenge {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "challenge_goal", nullable = false)
+    private ChallengeGoal challengeGoal;
 
-    @Column
+    @Column(name = "goal_value", nullable = false)
+    private Integer goalValue;
+
+    @Column(nullable = true)
     private String description;
 
-    @Column
+    @Column(nullable = true)
     private Integer reward;
 
     @Column(name = "start_date")
@@ -37,14 +42,17 @@ public class PersonalChallenge {
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 
-    @Column
+    @Column(nullable = true)
     private Boolean completed = false;
 
     @Enumerated(EnumType.STRING)
-    @Column
+    @Column(nullable = true)
     private ChallengeStatus status = ChallengeStatus.UPCOMING;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    // Constructors, getters, and setters
 }
+

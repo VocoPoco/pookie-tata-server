@@ -1,5 +1,7 @@
 DROP TYPE IF EXISTS challenge_status CASCADE;
 CREATE TYPE challenge_status AS ENUM ('UPCOMING', 'ACTIVE', 'EXPIRED');
+DROP TYPE IF EXISTS challenge_goal CASCADE;
+CREATE TYPE challenge_goal AS ENUM ('KILLS', 'ASSISTS', 'CS', 'VISION_SCORE', 'GOLD_EARNED', 'DAMAGE_DEALT', 'TURRET_KILLS', 'OBJECTIVE_KILLS', 'BARON_KILL', 'DRAGON_KILL', 'HERALD_KILL', 'INHIBITOR_KILL', 'WIN');
 
 -- No need to modify the ENUM type and other tables not related directly to the changes
 
@@ -7,7 +9,8 @@ CREATE TYPE challenge_status AS ENUM ('UPCOMING', 'ACTIVE', 'EXPIRED');
 DROP TABLE IF EXISTS personal_challenges CASCADE;
 CREATE TABLE personal_challenges (
                                      id SERIAL PRIMARY KEY,
-                                     name VARCHAR(255) NOT NULL,
+                                     challenge_goal challenge_goal NOT NULL,
+                                     goal_value INTEGER NOT NULL,
                                      description TEXT,
                                      reward INTEGER,
                                      start_date TIMESTAMP,
@@ -28,10 +31,11 @@ CREATE TABLE users (
                         password VARCHAR(64) NOT NULL,
                         email VARCHAR(100) UNIQUE NOT NULL,
                         summoner_name VARCHAR(100),
+                        summoner_tag VARCHAR(10),
                         currency_balance INTEGER DEFAULT 0,
                         personal_challenge_id INTEGER,
-                        FOREIGN KEY (personal_challenge_id) REFERENCES personal_challenges(id) ON DELETE CASCADE,
-                        status challenge_status DEFAULT 'UPCOMING'
+                        FOREIGN KEY (personal_challenge_id) REFERENCES personal_challenges(id) ON DELETE CASCADE
+
 );
 
 
@@ -41,11 +45,13 @@ CREATE TABLE users (
 DROP TABLE IF EXISTS challenges CASCADE;
 CREATE TABLE challenges (
                             id SERIAL PRIMARY KEY,
-                            name VARCHAR(255) NOT NULL,
+                            challenge_goal challenge_goal NOT NULL,
+                            goal_value INTEGER NOT NULL,
                             description TEXT,
                             reward INTEGER,
                             start_date TIMESTAMP,
-                            end_date TIMESTAMP
+                            end_date TIMESTAMP,
+                            status challenge_status DEFAULT 'UPCOMING'
 );
 
 -- Setting up the 'rewards' table
