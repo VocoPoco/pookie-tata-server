@@ -2,6 +2,7 @@ DROP TYPE IF EXISTS challenge_status CASCADE;
 CREATE TYPE challenge_status AS ENUM ('UPCOMING', 'ACTIVE', 'EXPIRED');
 DROP TYPE IF EXISTS challenge_goal CASCADE;
 CREATE TYPE challenge_goal AS ENUM ('KILLS', 'ASSISTS', 'CS', 'VISION_SCORE', 'GOLD_EARNED', 'DAMAGE_DEALT', 'TURRET_KILLS', 'OBJECTIVE_KILLS', 'BARON_KILL', 'DRAGON_KILL', 'HERALD_KILL', 'INHIBITOR_KILL', 'WIN');
+CREATE TYPE challenge_type AS ENUM ('DAILY', 'BOUNTY', 'WEEKLY', 'COMPETITIVE');
 
 -- No need to modify the ENUM type and other tables not related directly to the changes
 
@@ -18,7 +19,8 @@ CREATE TABLE personal_challenges (
                                      completed BOOLEAN DEFAULT FALSE,
                                      status challenge_status DEFAULT 'UPCOMING',
                                      user_id INTEGER,
-                                     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+                                     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                                     type challenge_type NOT NULL
 );
 
 -- Note: Ensure the users table and others are correctly set up as before
@@ -36,6 +38,7 @@ CREATE TABLE users (
                         personal_challenge_id INTEGER,
                         FOREIGN KEY (personal_challenge_id) REFERENCES personal_challenges(id) ON DELETE CASCADE
 
+
 );
 
 
@@ -51,7 +54,8 @@ CREATE TABLE challenges (
                             reward INTEGER,
                             start_date TIMESTAMP,
                             end_date TIMESTAMP,
-                            status challenge_status DEFAULT 'UPCOMING'
+                            status challenge_status DEFAULT 'UPCOMING',
+                            type challenge_type NOT NULL
 );
 
 -- Setting up the 'rewards' table

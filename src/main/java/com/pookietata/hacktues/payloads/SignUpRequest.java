@@ -15,6 +15,10 @@ public class SignUpRequest {
     private String username;
 
     @NotBlank
+    @Size(min = 4, max = 4, message = "Summoner tag must be 4 characters long")
+    private String summonerTag;
+
+    @NotBlank
     @Size(max = 40)
     @Email
     private String email;
@@ -23,7 +27,4 @@ public class SignUpRequest {
     @Size(min = 6, max = 20)
     private String password;
 
-    @NotBlank
-    @Size(min = 3, max = 16)
-    private String summonerName;
 }

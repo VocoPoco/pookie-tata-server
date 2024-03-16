@@ -23,6 +23,8 @@ class UserPrincipal implements UserDetails {
     private Long id;
 
     private String username;
+    private String summonerTag;
+    private String PUUID;
 
     @JsonIgnore
     private String email;
@@ -42,6 +44,8 @@ class UserPrincipal implements UserDetails {
         return new UserPrincipal(
                 user.getId(),
                 user.getUsername(),
+                user.getSummonerTag(),
+                user.getPUUID(),
                 user.getEmail(),
                 user.getPassword(),
                 authorities

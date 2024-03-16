@@ -19,9 +19,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"username"}),
+        @UniqueConstraint(columnNames = {"username", "summonerTag"}),
         @UniqueConstraint(columnNames = {"email"}),
-        @UniqueConstraint(columnNames = {"summonerName"})
 })
 public class User {
     @Id
@@ -31,6 +30,10 @@ public class User {
     @NotBlank
     @Column(nullable = false, length = 50)
     private String username;
+
+    @NotBlank
+    @Column(length = 4)
+    private String summonerTag;
 
     @NotBlank
     @Column(nullable = false, length = 64)
@@ -45,13 +48,6 @@ public class User {
     @Column(length = 100)
     private String PUUID;
 
-    @NotBlank
-    @Column(length = 100)
-    private String summonerName;
-
-    @NotBlank
-    @Column(length = 10)
-    private String summonerTag;
 
     @NotNull
     @Column(nullable = false)
